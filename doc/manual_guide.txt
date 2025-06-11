@@ -1,0 +1,71 @@
+🚀 GUÍA MANUAL - CREACIÓN DE VISUALIZACIONES EN SUPERSET
+=========================================================
+
+Como la automatización falló o no fue ejecutada, aquí tienes los pasos para reproducir el dashboard manualmente.
+
+1. 🌐 Accede a Superset:
+   http://localhost:8088
+
+2. 🔐 Inicia sesión:
+   Usuario: admin
+   Contraseña: admin
+
+3. 🗄️ CREA LA CONEXIÓN A LA BASE DE DATOS:
+   - Navega a: Data → Databases → + Database
+   - Nombre: Alpha Vantage DB
+   - URI de conexión: sqlite:////app/db/alpha_data.db
+   - Haz clic en "Test Connection" → luego en "Connect"
+
+4. 📊 CREA LOS DATASETS:
+   Para cada una de las siguientes tablas:
+   - balance_sheet
+   - cash_flow
+   - income_statement
+   - overview
+
+   Ir a: Data → Datasets → + Dataset
+   - Seleccionar la base: Alpha Vantage DB
+   - Escribir el nombre de la tabla
+   - Confirmar creación
+
+5. 📈 CREA LOS GRÁFICOS:
+
+   📌 Revenue Timeline
+   - Dataset: income_statement
+   - Tipo: Line Chart
+   - Métrica: totalRevenue
+   - Agrupar por: date
+
+   📌 Operating Cash Flow
+   - Dataset: cash_flow
+   - Tipo: Bar Chart
+   - Métrica: operatingCashflow
+   - Agrupar por: date
+
+   📌 Assets vs Liabilities
+   - Dataset: balance_sheet
+   - Tipo: Line Chart
+   - Métricas: totalAssets, totalLiabilities
+   - Agrupar por: date
+
+   📌 Bank Overview
+   - Dataset: overview
+   - Tipo: Table
+   - Columnas: symbol, name, sector, industry, marketCapitalization, peRatio
+
+6. 🎛️ CREA EL DASHBOARD:
+   - Ir a: Dashboards → + Dashboard
+   - Título: Análisis Financiero Alpha Vantage
+   - Agregar los 4 gráficos creados
+   - Organizar en layout de 2x2 o según preferencia
+
+7. ✅ VERIFICA LOS DATOS:
+   - Ir a: SQL Lab → Alpha Vantage DB
+   - Ejecutar:
+     SELECT COUNT(*) FROM balance_sheet;
+     SELECT COUNT(*) FROM cash_flow;
+     SELECT COUNT(*) FROM income_statement;
+     SELECT COUNT(*) FROM overview;
+
+🎯 Resultado esperado:
+Un dashboard con 4 visualizaciones financieras funcionales y profesionales.

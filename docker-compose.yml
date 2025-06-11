@@ -1,0 +1,40 @@
+services:
+  ingest:
+    build:
+      context: .
+      dockerfile: ingest/ingest.Dockerfile
+    volumes:
+      - ./ingest:/app/ingest
+      - ./data:/app/data
+    env_file:
+      - .env
+
+  validation:
+    build:
+      context: .
+      dockerfile: docker/validation.Dockerfile
+    volumes:
+      - ./validation:/app/validation
+      - ./data:/app/data
+    depends_on:
+      - ingest
+
+  superset:
+    image: apache/superset:latest
+    container_name: superset
+    restart: always
+    environment:
+      - SUPERSET_SECRET_KEY=supersecretkey
+      - PYTHONPATH=/app
+      - SUPERSET_CONFIG_PATH=/app/pythonpath/superset_config.py
+    ports:
+      - "8088:8088"
+    volumes:
+      - ./data:/app/data
+      - ./db:/app/db
+      - ./superset_config.py:/app/pythonpath/superset_config.py
+      - ./superset/superset_automation.py:/app/superset_automation.py
+      - ./superset/superset-entrypoint.sh:/app/entrypoint.sh
+      - ./superset/requirements.txt:/app/requirements.txt
+    entrypoint: ["/bin/bash", "/app/entrypoint.sh"]
+    user: root

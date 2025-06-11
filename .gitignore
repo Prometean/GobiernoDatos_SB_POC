@@ -1,0 +1,17 @@
+.env
+__pycache__/
+*.py[cod]
+*$py.class
+env/
+venv/
+.venv/
+.DS_Store
+Thumbs.db
+*.log
+*.pid
+*.seed
+*.bak
+.ipynb_checkpoints/
+superset_home/manual_guide.txt
+superset_home/uploads/
+*.db

@@ -1,0 +1,5 @@
+pandas
+openpyxl
+xlrd
+sqlalchemy
+flask_cors

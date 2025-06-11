@@ -5,7 +5,7 @@ import pandas as pd
 API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY")
 BASE_URL = "https://www.alphavantage.co/query"
 SYMBOL = "WFC"
-OUTPUT_DIR = "../staging"
+OUTPUT_DIR = "../data"
 
 endpoints = {
     "income_statement": "INCOME_STATEMENT",
